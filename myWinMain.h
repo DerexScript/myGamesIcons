@@ -22,7 +22,9 @@ void processButton(HWND hwnd, int myBtnCode){
         si.cb = sizeof(si);
         ZeroMemory(&pi, sizeof(pi));
         //char fileOpen[] = "notepad.exe D:\\Users\\Derex\\Documents\\CodeBlocks\\myGamesIcons\\bin\\Debug\\gamesLocation.ini";
-        if (!CreateProcessA(myProfileString, NULL, NULL, NULL, 0, 0, NULL, myPath, &si, &pi)){
+        string::size_type pos = string( myProfileString ).find_last_of( "\\/" );
+        string dirExec = string( myProfileString ).substr( 0, pos+1);
+        if (!CreateProcessA(myProfileString, NULL, NULL, NULL, 0, 0, NULL, dirExec.c_str(), &si, &pi)){
             DWORD lastErrorCode = GetLastError();
             ostringstream oss;
             oss << "0x" << hex << setw(8) << right << setfill('0') << lastErrorCode;

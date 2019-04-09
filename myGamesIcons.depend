@@ -27,7 +27,7 @@
 	<iomanip>
 	<typeinfo>
 
-1554780845 source:d:\users\derex\documents\codeblocks\mygamesicons\main.cpp
+1554781907 source:d:\users\derex\documents\codeblocks\mygamesicons\main.cpp
 	<windows.h>
 	<commctrl.h>
 	<sstream>
@@ -38,12 +38,12 @@
 	"myWindows.h"
 	"myWinMain.h"
 
-1554779651 d:\users\derex\documents\codeblocks\mygamesicons\resource.h
+1554781787 d:\users\derex\documents\codeblocks\mygamesicons\resource.h
 
-1554779867 d:\users\derex\documents\codeblocks\mygamesicons\mywindows.h
+1554781846 d:\users\derex\documents\codeblocks\mygamesicons\mywindows.h
 
-1554780832 d:\users\derex\documents\codeblocks\mygamesicons\mywinmain.h
+1554783458 d:\users\derex\documents\codeblocks\mygamesicons\mywinmain.h
 
-1554780075 source:d:\users\derex\documents\codeblocks\mygamesicons\resources.rc
+1554781775 source:d:\users\derex\documents\codeblocks\mygamesicons\resources.rc
 	"resource.h"
 
