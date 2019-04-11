@@ -3,12 +3,10 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="myGamesIcons" />
-		<Option platforms="Windows;" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option platforms="Windows;" />
 				<Option output="bin/Debug/myGamesIcons" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="0" />
@@ -18,7 +16,6 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option platforms="Windows;" />
 				<Option output="bin/Release/myGamesIcons" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
@@ -41,6 +38,7 @@
 			<Add library="comctl32" />
 		</Linker>
 		<Unit filename="main.cpp" />
+		<Unit filename="myGamesIcons.exe.manifest" />
 		<Unit filename="myWinMain.h" />
 		<Unit filename="myWindows.h" />
 		<Unit filename="resource.h" />

@@ -1,33 +1,5 @@
 # depslib dependency file v1.0
-1554765412 source:d:\users\derex\documents\codeblocks\myGamesIcons\main.cpp
-	<windows.h>
-	<commctrl.h>
-	"resource.h"
-	"myWindows.h"
-	"myWinMain.h"
-
-1554700613 d:\users\derex\documents\codeblocks\myGamesIcons\resource.h
-
-1554700449 source:d:\users\derex\documents\codeblocks\myGamesIcons\resources.rc
-	"resource.h"
-
-1554691987 d:\users\derex\documents\codeblocks\myGamesIcons\mywindows.cpp
-	<iostream>
-
-1554692085 source:d:\users\derex\documents\codeblocks\myGamesIcons\mywindows.cpp
-	<iostream>
-
-1554779296 d:\users\derex\documents\codeblocks\myGamesIcons\mywindows.h
-	<string>
-
-1554779192 d:\users\derex\documents\codeblocks\myGamesIcons\mywinmain.h
-	<iostream>
-	<string>
-	<sstream>
-	<iomanip>
-	<typeinfo>
-
-1554781907 source:d:\users\derex\documents\codeblocks\mygamesicons\main.cpp
+1554949445 source:d:\users\derex\documents\codeblocks\mygamesicons\main.cpp
 	<windows.h>
 	<commctrl.h>
 	<sstream>
@@ -38,12 +10,12 @@
 	"myWindows.h"
 	"myWinMain.h"
 
-1554781787 d:\users\derex\documents\codeblocks\mygamesicons\resource.h
+1554951832 d:\users\derex\documents\codeblocks\mygamesicons\resource.h
 
-1554781846 d:\users\derex\documents\codeblocks\mygamesicons\mywindows.h
+1554953145 d:\users\derex\documents\codeblocks\mygamesicons\mywindows.h
 
-1554783458 d:\users\derex\documents\codeblocks\mygamesicons\mywinmain.h
+1554953258 d:\users\derex\documents\codeblocks\mygamesicons\mywinmain.h
 
-1554781775 source:d:\users\derex\documents\codeblocks\mygamesicons\resources.rc
+1554850784 source:d:\users\derex\documents\codeblocks\mygamesicons\resources.rc
 	"resource.h"
 
