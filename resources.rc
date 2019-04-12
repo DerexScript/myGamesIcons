@@ -4,4 +4,3 @@ MYGAMES_ICON ICON "img\\ico.ico"
 BACKGROUND_BMP BITMAP DISCARDABLE "img\\background.bmp"
 LOGO_BMP BITMAP DISCARDABLE "img\\logo.bmp"
 BTN_DEFAULT_BMP BITMAP DISCARDABLE "img\\btn_default.bmp"
-

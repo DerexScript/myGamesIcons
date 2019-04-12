@@ -6,15 +6,9 @@ void processButton(HWND hwnd, int myBtnCode){
     char buf[10];
     itoa((myBtnCode-100),buf,10);
     //MessageBox(NULL, buf, "Button", MB_ICONEXCLAMATION | MB_OK);
-    char myIniFile[GetCurrentDirectory(0, NULL)+30];
-    GetCurrentDirectory(sizeof(myIniFile),myIniFile);
-    char myPath[sizeof(myIniFile)+10];
-    strcpy(myPath,myIniFile);
-    strcat(myPath, "\\");
-    strcat(myIniFile,"\\gamesLocation.ini");
     char dirProfileString[MAX_PATH];
     string lpAppName = "games_"+string(buf);
-    GetPrivateProfileString(lpAppName.c_str(), "gameDir", NULL, dirProfileString, sizeof(dirProfileString), myIniFile);
+    GetPrivateProfileString(lpAppName.c_str(), "gameDir", NULL, dirProfileString, sizeof(dirProfileString), dirIniFile);
     if (strlen(dirProfileString) > 0){
         STARTUPINFO si;
         PROCESS_INFORMATION pi;
@@ -55,15 +49,8 @@ void processButton(HWND hwnd, int myBtnCode){
 }
 
 void processButtonConfig (){
-    //definindo array myIniFile e adicionando +30 espaços extras! Pois irei fazer uma concatenação em seguida!
-    char myIniFile[GetCurrentDirectory(0, NULL)+30];
-    GetCurrentDirectory(sizeof(myIniFile),myIniFile);
-    char myPath[strlen(myIniFile)+10];
-    strcpy(myPath,myIniFile);
-    strcat(myPath, "\\");
-    strcat(myIniFile,"\\gamesLocation.ini");
     char myProfileString[10];
-    GetPrivateProfileString("Games_0", "index", NULL, myProfileString, sizeof(myProfileString), myIniFile);
+    GetPrivateProfileString("Games_0", "index", NULL, myProfileString, sizeof(myProfileString), dirIniFile);
     switch(GetLastError()){
         case 0x2:
         {
@@ -73,10 +60,10 @@ void processButtonConfig (){
             for(int i = 0; i < 35; i++) {
                 itoa(i,intChar,10);
                 lpAppName = "games_"+string(intChar);
-                WritePrivateProfileString(lpAppName.c_str(), "index", intChar, myIniFile);
-                WritePrivateProfileString(lpAppName.c_str(), "gameDir","",myIniFile);
-                WritePrivateProfileString(lpAppName.c_str(), "bmpDir","",myIniFile);
-                WritePrivateProfileString(lpAppName.c_str(), "gameTitle","\n",myIniFile);
+                WritePrivateProfileString(lpAppName.c_str(), "index", intChar, dirIniFile);
+                WritePrivateProfileString(lpAppName.c_str(), "gameDir","",dirIniFile);
+                WritePrivateProfileString(lpAppName.c_str(), "bmpDir","",dirIniFile);
+                WritePrivateProfileString(lpAppName.c_str(), "gameTitle","\n",dirIniFile);
             }
             free(intChar);
             Sleep(1000);
@@ -88,14 +75,13 @@ void processButtonConfig (){
     ZeroMemory(&si, sizeof(si));
     si.cb = sizeof(si);
     ZeroMemory(&pi, sizeof(pi));
-    char fileOpen[strlen(myIniFile)+30] = "notepad.exe ";
-    strcat(fileOpen, myIniFile);
+    char fileOpen[strlen(dirIniFile)+30] = "notepad.exe ";
+    strcat(fileOpen, dirIniFile);
     //Pegando diretorio do notepad
     char mySystemDir[MAX_PATH];
     GetSystemDirectoryA(mySystemDir, sizeof(mySystemDir));
     strcat(mySystemDir, "\\notepad.exe");
-    if (!CreateProcessA(mySystemDir, fileOpen, NULL, NULL, 0, 0, NULL, myPath, &si, &pi))
-    {
+    if (!CreateProcessA(mySystemDir, fileOpen, NULL, NULL, 0, 0, NULL, dirExePath, &si, &pi)){
         DWORD lastErrorCode = GetLastError();
         ostringstream oss;
         oss << "0x" << hex << setw(8) << right << setfill('0') << lastErrorCode;
@@ -174,9 +160,7 @@ int myWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         CW_USEDEFAULT, CW_USEDEFAULT, 549, 650,
         NULL, NULL, hInstance, NULL
     );
-
     myWindows(hInstance, hwnd);
-
     if(hwnd == NULL)
     {
         MessageBox(NULL, "Window Creation Failed!", "Error!",

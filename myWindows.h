@@ -29,12 +29,10 @@ void myWindows(HINSTANCE hInstance, HWND hwnd){
         NULL
     );
     SendMessage(textLogo, STM_SETIMAGE, IMAGE_BITMAP,(LPARAM) LoadBitmap(hInstance, MAKEINTRESOURCE(LOGO_BMP)));
-    char myPathIniFile[GetCurrentDirectory(0, NULL)+30];
-    GetCurrentDirectory(sizeof(myPathIniFile),myPathIniFile);
-    char exePath[sizeof(myPathIniFile)+10];
-    strcpy(exePath,myPathIniFile);
-    strcat(exePath, "\\");
-    strcat(myPathIniFile,"\\gamesLocation.ini");
+
+
+
+
     char myProfileString[MAX_PATH];
     char *intChar;
     intChar = (char *)malloc(sizeof(char)+1);
@@ -49,16 +47,16 @@ void myWindows(HINSTANCE hInstance, HWND hwnd){
             itoa((l-100),intChar,10);
             lpAppName = "games_"+std::string(intChar);
 
-            GetPrivateProfileString(lpAppName.c_str(), "index", NULL, myProfileString, sizeof(myProfileString), myPathIniFile);
+            GetPrivateProfileString(lpAppName.c_str(), "index", NULL, myProfileString, sizeof(myProfileString), dirIniFile);
             strcpy(index,myProfileString);
 
-            GetPrivateProfileString(lpAppName.c_str(), "gameDir", NULL, myProfileString, sizeof(myProfileString), myPathIniFile);
+            GetPrivateProfileString(lpAppName.c_str(), "gameDir", NULL, myProfileString, sizeof(myProfileString), dirIniFile);
             strcpy(gameDir,myProfileString);
 
-            GetPrivateProfileString(lpAppName.c_str(), "bmpDir", NULL, myProfileString, sizeof(myProfileString), myPathIniFile);
+            GetPrivateProfileString(lpAppName.c_str(), "bmpDir", NULL, myProfileString, sizeof(myProfileString), dirIniFile);
             strcpy(bmpNameBuff,myProfileString);
 
-            GetPrivateProfileString(lpAppName.c_str(), "gameTitle", NULL, myProfileString, sizeof(myProfileString), myPathIniFile);
+            GetPrivateProfileString(lpAppName.c_str(), "gameTitle", NULL, myProfileString, sizeof(myProfileString), dirIniFile);
             strcpy(gameTitle,myProfileString);
 
             btn[l] = CreateWindowExA (
@@ -87,7 +85,7 @@ void myWindows(HINSTANCE hInstance, HWND hwnd){
                 EnableWindow(btn[l], TRUE);
                 EnableWindow(textBtn[l], TRUE);
                 if (strlen(bmpNameBuff) > 0){
-                        std::string bmpName = exePath;
+                        std::string bmpName = dirExePath;
                         bmpName += "img\\";
                         bmpName += bmpNameBuff;
                         setImgBtn(hInstance, btn[l], (char *)bmpName.c_str());

@@ -11,9 +11,11 @@
 #include <string>
 #include <iostream>
 #include "resource.h"
+#include "init.h"
 #include "myWindows.h"
 #include "myWinMain.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
-   return myWinMain(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
+    getPath();
+    return myWinMain(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 }
