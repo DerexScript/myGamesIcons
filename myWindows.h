@@ -13,8 +13,8 @@ void setImgBtn(HINSTANCE hInstance, HWND btn, char bmpName[] ){
     SendMessage(btn, BM_SETIMAGE, IMAGE_BITMAP,(LPARAM) bmp_btn);
 }
 
-HWND btn[29], textLogo, configBtn;
-HWND textBtn[29];
+HWND btn[35], textLogo, configBtn;
+HWND textBtn[35];
 int l = 100;
 void myWindows(HINSTANCE hInstance, HWND hwnd){
     textLogo = CreateWindowExA (
@@ -30,8 +30,16 @@ void myWindows(HINSTANCE hInstance, HWND hwnd){
     );
     SendMessage(textLogo, STM_SETIMAGE, IMAGE_BITMAP,(LPARAM) LoadBitmap(hInstance, MAKEINTRESOURCE(LOGO_BMP)));
 
-
-
+    HFONT hFont = CreateFontA(0, 5.8, 0, 0,
+                              0,
+                              0, 0, 0,
+                              DEFAULT_CHARSET,
+                              OUT_DEFAULT_PRECIS,
+                              CLIP_DEFAULT_PRECIS,
+                              DEFAULT_QUALITY,
+                              DEFAULT_PITCH,
+                              "Modern No. 20"
+    );
 
     char myProfileString[MAX_PATH];
     char *intChar;
@@ -81,6 +89,7 @@ void myWindows(HINSTANCE hInstance, HWND hwnd){
                        hInstance,
                        NULL
             );
+            SendMessage(textBtn[l], WM_SETFONT, (WPARAM)hFont, (LPARAM)TRUE);
             if (strlen(index) > 0 && strlen(gameDir) > 0 && strlen(bmpNameBuff) >= 0 && strlen(gameTitle) >= 0) {
                 EnableWindow(btn[l], TRUE);
                 EnableWindow(textBtn[l], TRUE);
@@ -120,16 +129,5 @@ void myWindows(HINSTANCE hInstance, HWND hwnd){
                    hInstance,
                    NULL
     );
-    HFONT hFont = CreateFontA(0, 6, 0, 0,
-                              0,
-                              0, 0, 0,
-                              DEFAULT_CHARSET,
-                              OUT_DEFAULT_PRECIS,
-                              CLIP_DEFAULT_PRECIS,
-                              DEFAULT_QUALITY,
-                              DEFAULT_PITCH,
-                              "Modern No. 20"
-                             );
-    SendMessage(textBtn[0], WM_SETFONT, (WPARAM)hFont, (LPARAM)TRUE);
 }
 #endif // MYWINDOWS_H

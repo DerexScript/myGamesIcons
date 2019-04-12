@@ -138,7 +138,7 @@ int myWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     wc.hInstance     = hInstance;
     wc.hIcon         = LoadIcon(hInstance, MAKEINTRESOURCE(MYGAMES_ICON));
     wc.hCursor       = LoadCursor(NULL, IDC_ARROW);
-    wc.hbrBackground = CreatePatternBrush((HBITMAP) LoadImageA(hInstance,".//img//background.bmp",
+    wc.hbrBackground = CreatePatternBrush((HBITMAP) LoadImageA(hInstance,".\\img\\background.bmp",
                                                         IMAGE_BITMAP,0,0,
                                                         LR_CREATEDIBSECTION|LR_LOADFROMFILE));
     wc.lpszMenuName  = NULL;
