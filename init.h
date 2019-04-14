@@ -1,5 +1,6 @@
 #ifndef INIT_H
 #define INIT_H
+NOTIFYICONDATA nid = {};
 char dirIniFile[MAX_PATH];
 char dirExePath[MAX_PATH];
 void getPath(){

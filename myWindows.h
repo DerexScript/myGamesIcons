@@ -17,6 +17,15 @@ HWND btn[35], textLogo, configBtn;
 HWND textBtn[35];
 int l = 100;
 void myWindows(HINSTANCE hInstance, HWND hwnd){
+    HICON hIcon = LoadIconA(hInstance,MAKEINTRESOURCE(MYGAMES_ICON));
+    nid.cbSize = sizeof(nid);
+    nid.hWnd = hwnd;
+    nid.uID = 1;
+    nid.uFlags = NIF_ICON|NIF_TIP|NIF_MESSAGE;
+    nid.uCallbackMessage = APPWM_ICONNOTIFY;
+    nid.hIcon = hIcon;
+    strcpy(nid.szTip, "Games");
+    Shell_NotifyIconA(NIM_ADD, &nid);
     textLogo = CreateWindowExA (
         WS_EX_COMPOSITED|WS_EX_NOACTIVATE|WS_EX_NOPARENTNOTIFY,
         "STATIC",

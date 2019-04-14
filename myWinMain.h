@@ -2,6 +2,26 @@
 #define MYWINMAIN_H
 
 using namespace std;
+void ShowContextMenu(HWND hWnd){
+    POINT pt;
+    GetCursorPos(&pt);
+    HMENU hMenu = CreatePopupMenu();
+    if(hMenu)
+    {
+        if( IsWindowVisible(hWnd) )
+            InsertMenu(hMenu, -1, MF_BYPOSITION, APP_HIDE, "Hide");
+        else
+            InsertMenu(hMenu, -1, MF_BYPOSITION, APP_SHOW, "Show");
+        InsertMenu(hMenu, -1, MF_BYPOSITION, APP_EXIT, "Exit");
+
+
+        SetForegroundWindow(hWnd);
+        TrackPopupMenu(hMenu, TPM_BOTTOMALIGN,
+                       pt.x, pt.y, 0, hWnd, NULL );
+        DestroyMenu(hMenu);
+    }
+}
+
 void processButton(HWND hwnd, int myBtnCode){
     char buf[10];
     itoa((myBtnCode-100),buf,10);
@@ -94,6 +114,29 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     switch(msg)
     {
+        case APPWM_ICONNOTIFY:
+            switch (lParam){
+                case WM_LBUTTONUP:
+                    if( IsWindowVisible(hwnd) )
+                        ShowWindow(hwnd, SW_HIDE);
+                    else
+                        ShowWindow(hwnd, SW_RESTORE);
+                    break;
+                case WM_RBUTTONUP:
+                    ShowContextMenu(hwnd);
+                    break;
+                case WM_CONTEXTMENU:
+                    ShowContextMenu(hwnd);
+                    break;
+            }
+        break;
+        case WM_SYSCOMMAND:
+            if((wParam & 0xFFF0) == SC_MINIMIZE)
+            {
+                ShowWindow(hwnd, SW_HIDE);
+                return 1;
+            }
+            break;
         case WM_CTLCOLORSTATIC:
             {
                 long idMyStatics = GetWindowLong((HWND)lParam, GWL_ID);
@@ -110,17 +153,32 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             }else if (wParam == BTN_CONFIG){
                 processButtonConfig();
             }
+            switch (LOWORD(wParam)){
+                case APP_HIDE:
+                    case IDOK:
+                        ShowWindow(hwnd, SW_HIDE);
+                        break;
+                    break;
+                case APP_SHOW:
+                    ShowWindow(hwnd, SW_RESTORE);
+                    break;
+                case APP_EXIT:
+                    DestroyWindow(hwnd);
+                    break;
+            }
         break;
         case WM_CLOSE:
             DestroyWindow(hwnd);
         break;
         case WM_DESTROY:
+            nid.uFlags = 0;
+            Shell_NotifyIcon(NIM_DELETE, &nid);
             PostQuitMessage(0);
         break;
         default:
             return DefWindowProc(hwnd, msg, wParam, lParam);
     }
-    return 0;
+    return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
 int myWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
@@ -168,8 +226,8 @@ int myWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         return 0;
     }
     ShowWindow(hwnd, nCmdShow);
+    ShowWindow(hwnd, SW_HIDE);
     UpdateWindow(hwnd);
-
     while(GetMessage(&Msg, NULL, 0, 0) > 0)
     {
         TranslateMessage(&Msg);
