@@ -62,6 +62,7 @@ void processButton(HWND hwnd, int myBtnCode){
             }
         }
         ShowWindow(hwnd, SW_MINIMIZE);
+        ShowWindow(hwnd, SW_HIDE);
     }else{
         MessageBoxA(NULL, "Botao Desativado!", "Status Botao", MB_ICONEXCLAMATION | MB_OK);
     }

@@ -17,5 +17,14 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow){
     getPath();
+    HANDLE m_singleInstanceMutex = CreateMutex(NULL, TRUE, "myGamesSI_IBJRKFYAHE");
+    if (m_singleInstanceMutex == NULL || GetLastError() == ERROR_ALREADY_EXISTS) {
+        HWND existingApp = FindWindowA(0, "myGames");
+        if (existingApp){
+            ShowWindow(existingApp, SW_RESTORE);
+            SetForegroundWindow(existingApp);
+        }
+        return 0;
+    }
     return myWinMain(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 }
