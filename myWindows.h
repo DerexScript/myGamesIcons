@@ -127,6 +127,7 @@ void myWindows(HINSTANCE hInstance, HWND hwnd){
             l++;
         }
     }
+    free(intChar);
     configBtn = CreateWindowExA (
                    WS_EX_COMPOSITED,
                    "BUTTON",
